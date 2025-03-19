@@ -2,9 +2,9 @@ name: R-CMD-check
 
 on:
   push:
-    branches: [master]  
+    branches: [master,med_test_gsoc25]  
   pull_request:
-    branches: [master]  
+    branches: [master,med_test_gsoc25]  
 
 jobs:
   R-CMD-check:
