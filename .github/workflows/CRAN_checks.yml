@@ -24,15 +24,19 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
-
+          
+      - name: Install rcmdcheck separately
+        run: |
+          install.packages("rcmdcheck")
+        shell: Rscript {0}
+        
       - name: Install R dependencies
         run: |
-          install.packages(c("remotes", "devtools"))
+          install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
 
       - name: Run R CMD check
         run: |
-          options(cran = "https://cran.rstudio.com")
-          devtools::check()
+          rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
         shell: Rscript {0}
